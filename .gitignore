@@ -1,0 +1,15 @@
+# Arquivos do sistema
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Ambientes de desenvolvimento e editores
+.vscode/
+.idea/
+*.swp
+*.bak
+
+# Arquivos de log e tráfego
+*.log
+*.pcap
+*.cap

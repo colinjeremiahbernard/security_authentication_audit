@@ -1,0 +1,30 @@
+# ====================================================================
+# Configuração de Jail do Fail2ban para proteção do serviço vsftpd
+# Destino comum: /etc/fail2ban/jail.d/vsftpd.local
+# ====================================================================
+
+[vsftpd]
+# Ativa a regra de monitoramento
+enabled  = true
+
+# Porta padrão de escuta do serviço FTP
+port     = ftp,ftp-data,ftps,ftps-data
+
+# Seleciona o filtro nativo do Fail2ban para parsing de logs do vsftpd
+filter   = vsftpd
+
+# Caminho do arquivo de log gerado pelo daemon FTP
+logpath  = /var/log/vsftpd.log
+
+# Número máximo de falhas de autenticação permitidas antes do banimento
+maxretry = 3
+
+# Janela de tempo (em segundos) na qual as falhas devem ocorrer (ex: 10 minutos)
+findtime = 600
+
+# Tempo de banimento temporário em segundos (ex: 3600s = 1 hora)
+# Se definido como -1, o banimento será permanente até liberação manual
+bantime  = 3600
+
+# Ação de bloqueio: adiciona regra de DROP no firewall (iptables/nftables)
+banaction = iptables-multiport

@@ -1,0 +1,19 @@
+# ====================================================================
+# Lista Didática de Contas Comuns em Ambientes de Laboratório / Teste
+# Utilizada para simulação de enumeração e auditoria de autenticação
+# ====================================================================
+admin
+administrator
+root
+user
+guest
+test
+backup
+msfadmin
+service_account
+suporte
+financeiro
+ti
+operador
+dev
+temp

@@ -1,0 +1,24 @@
+# ====================================================================
+# Dicionário Didático de Senhas Fracas Comuns para Auditoria Laboratorial
+# Utilizado para validação de resiliência e políticas de complexidade
+# ====================================================================
+password
+123456
+admin
+admin123
+msfadmin
+root
+toor
+guest
+welcome
+welcome1
+12345678
+password123
+letmein
+qwerty
+mudar123
+senha123
+teste123
+company2024
+temp2024
+masterkey
