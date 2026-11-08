@@ -1,5 +1,6 @@
 # 🛡️ Auditoria de Autenticação e Hardening de Serviços em Ambiente Controlado
 
+[![Repositório](https://img.shields.io/badge/GitHub-security__authentication__audit-181717?style=flat&logo=github)](https://github.com/colinjeremiahbernard/security_authentication_audit)
 [![Licença](https://img.shields.io/badge/licença-MIT-blue.svg)](LICENSE)
 [![Ambiente](https://img.shields.io/badge/ambiente-VirtualBox%20Host--Only-green.svg)](#-topologia-do-laborat%C3%B3rio)
 [![Foco](https://img.shields.io/badge/foco-Seguran%C3%A7a%20Defensiva%20%26%20Hardening-red.svg)](#-medidas-de-mitiga%C3%A7%C3%A3o-e-hardening)
@@ -151,11 +152,16 @@ A implementação de controles defensivos é a etapa mais crítica do projeto. A
 
 ## 🚀 Como Reproduzir o Laboratório com Segurança
 
-1. **Baixar as Máquinas Virtuais:** Obtenha as imagens do Kali Linux e do Metasploitable 2 através de seus canais oficiais.
-2. **Configurar a Rede do VirtualBox:** Altere a placa de rede de ambas as VMs para **Rede Host-Only (Host-Only Adapter)**.
-3. **Validar o Endereçamento:** Verifique os IPs atribuídos e certifique-se de que não há conectividade com a Internet.
-4. **Executar Auditorias em Ambiente Isolado:** Conduza os testes monitorando o consumo de CPU e a geração de logs no servidor alvo.
-5. **Aplicar as Contramedidas:** Implemente os arquivos de configuração disponíveis na pasta `configs/` e teste novamente para comprovar a eficácia das defesas.
+1. **Clonar este repositório:**
+   ```bash
+   git clone https://github.com/colinjeremiahbernard/security_authentication_audit.git
+   cd security_authentication_audit
+   ```
+2. **Baixar as Máquinas Virtuais:** Obtenha as imagens do Kali Linux e do Metasploitable 2 através de seus canais oficiais.
+3. **Configurar a Rede do VirtualBox:** Altere a placa de rede de ambas as VMs para **Rede Host-Only (Host-Only Adapter)**.
+4. **Validar o Endereçamento:** Verifique os IPs atribuídos e certifique-se de que não há conectividade com a Internet.
+5. **Executar Auditorias em Ambiente Isolado:** Conduza os testes monitorando o consumo de CPU e a geração de logs no servidor alvo.
+6. **Aplicar as Contramedidas:** Implemente os arquivos de configuração disponíveis na pasta `configs/` e teste novamente para comprovar a eficácia das defesas.
 
 ---
 
