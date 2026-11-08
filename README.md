@@ -40,29 +40,16 @@ A autenticação é a primeira linha de defesa em qualquer infraestrutura. Siste
 
 Para garantir segurança operacional absoluta, todo o tráfego foi contido em uma rede virtual isolada (**Host-Only Network**), impossibilitando qualquer vazamento para a rede local física ou Internet.
 
-```
-       +-------------------------------------------------------+
-       |           VirtualBox Host-Only Network                |
-       |                (Subnet: 192.168.56.0/24)              |
-       +-------------------------------------------------------+
-                     |                                   |
-                     |                                   |
-        +-------------------------+         +-------------------------+
-        |   Máquina Auditora      |         |   Máquina Alvo          |
-        |   (Kali Linux)          |         |   (Metasploitable 2)    |
-        |   IP: 192.168.56.10     |         |   IP: 192.168.56.20     |
-        |                         |         |                         |
-        | - Medusa (Auditor)      |         | - vsftpd (FTP:21)       |
-        | - Nmap / Enum4linux     |         | - Apache/DVWA (HTTP:80) |
-        | - Scripts de Auditoria  |         | - Samba (SMB:139/445)   |
-        +-------------------------+         +-------------------------+
-```
+![Topologia do Laboratório](images/diagram-network.png)
 
 > 📄 Detalhes de configuração e comandos para setup da rede: [docs/topologia-laboratorio.md](docs/topologia-laboratorio.md)
 
 ---
 
 ## 🔬 Cenários Analisados
+
+#### 📡 Evidência de Conectividade e Descoberta de Serviços:
+![Validação de Rede](images/terminal-network-validation.png)
 
 ### 1. Serviço FTP (Protocolo Legado em Texto Claro)
 * **Porta:** 21/TCP
@@ -115,11 +102,17 @@ A implementação de controles defensivos é a etapa mais crítica do projeto. A
 2. **Defesa Ativa com Fail2ban:** Monitorar logs de autenticação (`/var/log/vsftpd.log`) e bloquear automaticamente IPs de origem no firewall após 3 falhas consecutivas.
 3. **Restrição de Conexão no Firewall:** Limitar a taxa de conexões na porta 21 via módulo `recent` do `iptables` ou tabelas de estado no `nftables`.
 
+#### 🛡️ Evidência de Bloqueio Ativo no FTP (Fail2ban + iptables):
+![Evidência de Bloqueio Fail2ban](images/fail2ban-mitigation-evidence.png)
+
 ### Para Aplicações Web:
 1. **Rate Limiting Reverso:** Configurar limitação de taxa em proxies reversos (ex: `limit_req_zone` no Nginx) permitindo no máximo 3 requisições de login por minuto por IP.
 2. **Desaceleração Progressiva:** Introduzir atrasos artificiais na resposta do backend a cada erro consecutivo para o mesmo usuário.
 3. **Mecanismos Anti-Automação:** Implementar desafios CAPTCHA invisíveis (Turnstile, reCAPTCHA) ou verificação de integridade de cliente.
 4. **MFA (Multi-Factor Authentication):** Exigir segundo fator (TOTP/FIDO2) em todas as contas administrativas.
+
+#### 🛡️ Evidência de Mitigação Ativa na Aplicação Web (Rate Limiting HTTP 429):
+![Evidência de Rate Limiting](images/nginx-ratelimit-evidence.png)
 
 ### Para SMB e Diretórios Corporativos:
 1. **Políticas de Bloqueio de Conta (Account Lockout Policy):** Definir limiar de 5 tentativas inválidas com janela de reinicialização de 15 minutos.
@@ -148,7 +141,10 @@ A implementação de controles defensivos é a etapa mais crítica do projeto. A
 │   ├── usuarios-exemplo.txt            # Dicionário higienizado de contas de teste
 │   └── senhas-exemplo.txt              # Dicionário higienizado de senhas fracas comuns
 └── images/
-    └── .gitkeep                        # Pasta reservada para suas capturas de tela
+    ├── diagram-network.png             # Diagrama visual da arquitetura da rede
+    ├── terminal-network-validation.png # Validação de IP e varredura de portas
+    ├── fail2ban-mitigation-evidence.png# Evidência de bloqueio ativo no FTP
+    └── nginx-ratelimit-evidence.png    # Evidência de resposta HTTP 429 por rate limit
 ```
 
 ---
